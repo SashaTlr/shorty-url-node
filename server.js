@@ -24,10 +24,24 @@ mongoose.connection.on("error", function(err) {
 //routes
 var router = express.Router();
 
-router.get('/', function(req, res){
-  res.json({message: "shorty url api"});
-});
 // routes will go here
+router.route('/shorten')
+
+  .post(function(req, res){
+    var short_url = new shortUrl();
+    short_url.url = req.body.url;
+    short_url.shortcode = req.body.shortcode;
+
+    short_url.save(function(err){
+      if (err) {
+        res.send(err);
+      }
+      else {
+        res.json({ shortcode: short_url.shortcode });
+      }
+    });
+  });
+
 
 app.use('/', router);
 
