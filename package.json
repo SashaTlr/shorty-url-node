@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/SashaTlr/shorty-url-node/issues"
   },
-  "homepage": "https://github.com/SashaTlr/shorty-url-node#readme"
+  "homepage": "https://github.com/SashaTlr/shorty-url-node#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }
