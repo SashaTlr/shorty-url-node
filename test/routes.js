@@ -63,9 +63,30 @@ describe ('Routing', function(){
         });
     });
 
-    // it('', function(done){
-    //
-    // });
+    it('should return status 302 if shortcode is found', function(done){
+      request(api_url)
+        .get('google')
+        // .send(urlShort)
+        .end(function(err, res){
+          if (err) {
+            throw err
+          }
+          res.should.have.property('statusCode', 302);
+          done();
+        });
+    });
+    it('should return header location "http://www.google.com" if shortcode is found', function(done){
+      request(api_url)
+        .get('google')
+        // .send(urlShort)
+        .end(function(err, res){
+          if (err) {
+            throw err
+          }
+          res.header.should.have.property('location', 'http://www.google.com');
+          done();
+        });
+    });
   });
 
 })
