@@ -9,6 +9,19 @@ describe ('Routing', function(){
 
   before (function(done){
     mongoose.connect(mongoURI);
+    var urlShort = {
+      url: "http://www.google.com",
+      shortcode: "google"
+    };
+
+    request(api_url)
+      .post('shorten')
+      .send(urlShort)
+      .end(function(err, res){
+        if (err) {
+          throw err;
+        }
+      });
     done();
   });
 
@@ -29,7 +42,10 @@ describe ('Routing', function(){
           res.should.have.property('statusCode', 409);
           done();
         });
+    });
 
+    it('', function(done){
+        
     });
   });
 

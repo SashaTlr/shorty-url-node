@@ -35,6 +35,8 @@ router.route('/shorten')
     short_url.shortcode = req.body.shortcode || new RandExp(/^[0-9a-zA-Z_]{6}$/).gen();
 
     short_url.save(function(err){
+      console.log(res);
+      console.log(err);
       if (err) {
         if (err.code == 11000) {
           res.status(409).send('The desired shortcode is already in use. Shortcodes are case-sensitive.')
