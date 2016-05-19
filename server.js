@@ -68,8 +68,12 @@ router.route('/shorten')
           res.send(err);
         }
         else {
-          res.json("Location: " + obj.url);
-          console.log(obj);
+          //res.statusCode = 302;
+          //res.writeHead("Location", obj.url);
+          //res.json("Location: " + obj.url);
+          res.writeHead(302, {'Location': obj.url});
+          //console.log(obj);
+          res.end();
         }
     });
   });
