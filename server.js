@@ -36,9 +36,8 @@ router.route('/shorten')
 
     short_url.save(function(err){
       if (err) {
-        console.log(err);
         if (err.code == 11000) {
-          res.status(409).send('The the desired shortcode is already in use. Shortcodes are case-sensitive.')
+          res.status(409).send('The desired shortcode is already in use. Shortcodes are case-sensitive.')
         } else if (err.errors.url && err.errors.url.kind == 'required') {
             res.status(400).send(err.errors.url.message);
         } else if (err.errors.shortcode.kind == 'user defined') {
