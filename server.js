@@ -34,11 +34,17 @@ router.route('/shorten')
 
     short_url.save(function(err){
       if (err) {
-        if (err.errors.url && err.errors.url.kind == 'required') {
-          res.status(400).send(err.errors.url.kind.message);
+        console.log(err);
+        if (err.code == 11000) {
+          res.status(409).send('The the desired shortcode is already in use. Shortcodes are case-sensitive.')
+        } else if (err.errors.url && err.errors.url.kind == 'required') {
+            res.status(400).send(err.errors.url.message);
         } else if (err.errors.shortcode.kind == 'user defined') {
-          res.status(422).send(err.errors.shortcode.message);
+            res.status(422).send(err.errors.shortcode.message);
+        } else {
+          res.status(500).send('An unknown internal error occurred');
         }
+        res.end();
       }
       else {
         res.status(200).setHeader('Content-Type', 'application/json');
@@ -65,6 +71,7 @@ router.route('/shorten')
 // return url for given shortcode
   router.route('/:shortcode')
     .get(function(req, res){
+      console.log(req.params);
       shortUrl.findOne(
         {
           shortcode: req.params.shortcode
