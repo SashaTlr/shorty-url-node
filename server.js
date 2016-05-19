@@ -37,7 +37,8 @@ router.route('/shorten')
         res.send(err);
       }
       else {
-        res.json({ shortcode: short_url.shortcode });
+        res.status(200).type('application/json').json({ shortcode: short_url.shortcode });
+        res.end();
       }
     });
   });
@@ -59,7 +60,6 @@ router.route('/shorten')
 // return url for given shortcode
   router.route('/:shortcode')
     .get(function(req, res){
-      console.log(req.params.shortcode);
       shortUrl.findOne(
         {
           shortcode: req.params.shortcode
@@ -68,11 +68,7 @@ router.route('/shorten')
           res.send(err);
         }
         else {
-          //res.statusCode = 302;
-          //res.writeHead("Location", obj.url);
-          //res.json("Location: " + obj.url);
           res.writeHead(302, {'Location': obj.url});
-          //console.log(obj);
           res.end();
         }
     });
