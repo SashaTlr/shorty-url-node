@@ -26,6 +26,29 @@ describe ('Routing', function(){
   });
 
   describe('Create Shortened URL', function(){
+
+    it('should return error 400 if url is blank', function(done){
+      var urlShort = {
+        url: "",
+        shortcode: "apple"
+      };
+
+      request(api_url)
+        .post('shorten')
+        .send(urlShort)
+        .end(function(err, res){
+          if (err) {
+            throw err;
+          }
+          res.should.have.property('statusCode', 400);
+          done();
+        });
+    });
+
+    xit('should create a passing shortcode if shortcode is blank' , function(done){
+
+    });
+
     it('should return error 409 if shortcode already exists', function(done){
       var urlShort = {
         url: "http://www.google.com",
@@ -44,9 +67,9 @@ describe ('Routing', function(){
         });
     });
 
-    // it('', function(done){
-    //
-    // });
+    xit('should return error 422 if shortcode already exists' , function(done){
+
+    });
   });
 
   describe('Get encoded shortcode', function(){
@@ -75,6 +98,7 @@ describe ('Routing', function(){
           done();
         });
     });
+
     it('should return header location "http://www.google.com" if shortcode is found', function(done){
       request(api_url)
         .get('google')
