@@ -42,7 +42,9 @@ router.route('/shorten')
     });
   });
 
-    router.route('/short_urls')
+
+  //return all short codes
+  router.route('/short_urls')
     .get(function(req, res) {
       shortUrl.find(function(err, short_urls){
         if (err) {
@@ -53,6 +55,24 @@ router.route('/shorten')
         }
       });
     });
+
+// return url for given shortcode
+  router.route('/:shortcode')
+    .get(function(req, res){
+      console.log(req.params.shortcode);
+      shortUrl.findOne(
+        {
+          shortcode: req.params.shortcode
+        }, function(err, obj) {
+        if (err) {
+          res.send(err);
+        }
+        else {
+          res.json("Location: " + obj.url);
+          console.log(obj);
+        }
+    });
+  });
 
 app.use('/', router);
 
