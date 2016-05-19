@@ -2,6 +2,8 @@ var express = require("express");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var shortUrl = require("./app/models/shortUrl");
+var RandExp = require('randexp');
+
 var port = 3000;
 
 var app = express();
@@ -30,7 +32,7 @@ router.route('/shorten')
   .post(function(req, res){
     var short_url = new shortUrl();
     short_url.url = req.body.url;
-    short_url.shortcode = req.body.shortcode;
+    short_url.shortcode = req.body.shortcode || new RandExp(/^[0-9a-zA-Z_]{6}$/).gen();
 
     short_url.save(function(err){
       if (err) {
