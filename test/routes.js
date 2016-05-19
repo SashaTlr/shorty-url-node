@@ -67,7 +67,7 @@ describe ('Routing', function(){
         });
     });
 
-    xit('should return error 422 if shortcode already exists' , function(done){
+    xit('should return error 422 if shortcode fails to meet regex /^[0-9a-zA-Z_]{4,}$/' , function(done){
 
     });
   });
