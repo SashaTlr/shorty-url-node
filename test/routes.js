@@ -44,10 +44,28 @@ describe ('Routing', function(){
         });
     });
 
-    it('', function(done){
-        
-    });
+    // it('', function(done){
+    //
+    // });
   });
 
+  describe('Get encoded shortcode', function(){
+    it('should return error 404 if shortcode cannot be found', function(done){
+      request(api_url)
+        .get('test')
+        // .send(urlShort)
+        .end(function(err, res){
+          if (err) {
+            throw err
+          }
+          res.should.have.property('statusCode', 404);
+          done();
+        });
+    });
+
+    // it('', function(done){
+    //
+    // });
+  });
 
 })
