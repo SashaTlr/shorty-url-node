@@ -42,6 +42,17 @@ router.route('/shorten')
     });
   });
 
+    router.route('/short_urls')
+    .get(function(req, res) {
+      shortUrl.find(function(err, short_urls){
+        if (err) {
+          res.send(err);
+        }
+        else {
+          res.json(short_urls);
+        }
+      });
+    });
 
 app.use('/', router);
 
