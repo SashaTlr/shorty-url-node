@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var shortUrlSchema = new mongoose.Schema({
-  url: String,
+  url: {type: String, required: true},
   shortcode: String,
   updated_at: {type: Date, default: Date.now},
 });
