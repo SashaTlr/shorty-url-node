@@ -48,7 +48,7 @@ router.route('/shorten')
         res.end();
       }
       else {
-        res.status(200).setHeader('Content-Type', 'application/json');
+        res.status(201).setHeader('Content-Type', 'application/json');
         res.json({ shortcode: short_url.shortcode });
         res.end();
       }
