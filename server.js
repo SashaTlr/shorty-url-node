@@ -33,8 +33,12 @@ router.route('/shorten')
     short_url.shortcode = req.body.shortcode;
 
     short_url.save(function(err){
-      if (err['errors']['url']['kind']== 'required') {
-        res.status(400).send('url is not present');
+      if (err) {
+        if (err.errors.url && err.errors.url.kind == 'required') {
+          res.status(400).send(err.errors.url.kind.message);
+        } else if (err.errors.shortcode.kind == 'user defined') {
+          res.status(422).send(err.errors.shortcode.message);
+        }
       }
       else {
         res.status(200).setHeader('Content-Type', 'application/json');
