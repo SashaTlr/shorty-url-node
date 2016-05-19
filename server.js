@@ -64,14 +64,18 @@ router.route('/shorten')
       shortUrl.findOne(
         {
           shortcode: req.params.shortcode
-        }, function(err, obj) {
-        if (err) {
+        }
+      , function(err, url_obj) {
+        if (url_obj) {
+          res.writeHead(302, {'Location': url_obj.url});
+        } else if (err){
           res.send(err);
+        } else if (!url_obj){
+          res.status(404).send('The shortcode cannot be found in the system.');
+        } else {
+          res.status(500).send('An unknown internal error occurred');
         }
-        else {
-          res.writeHead(302, {'Location': obj.url});
-          res.end();
-        }
+        res.end();
     });
   });
 
