@@ -67,8 +67,22 @@ describe ('Routing', function(){
         });
     });
 
-    xit('should return error 422 if shortcode fails to meet regex /^[0-9a-zA-Z_]{4,}$/' , function(done){
+    it('should return error 422 if shortcode fails to meet regex /^[0-9a-zA-Z_]{4,}$/' , function(done){
+      var urlShort = {
+        url: "http://www.apple.com",
+        shortcode: "###"
+      };
 
+      request(api_url)
+        .post('shorten')
+        .send(urlShort)
+        .end(function(err, res){
+          if (err) {
+            throw err;
+          }
+          res.should.have.property('statusCode', 422);
+          done();
+        });
     });
   });
 
