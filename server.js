@@ -72,7 +72,6 @@ router.route('/shorten')
 // return url for given shortcode
   router.route('/:shortcode')
     .get(function(req, res){
-      console.log(req.params);
       shortUrl.findOne(
         {
           shortcode: req.params.shortcode
