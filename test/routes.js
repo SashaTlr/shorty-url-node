@@ -100,7 +100,7 @@ describe ('Routing', function(){
       });
     });
 
-    it('should return status 201 if post is successful' , function(done){
+    it('should return status 201 and json content type if post is successful' , function(done){
       var urlShort = {
         url: "http://www.apple.com",
         shortcode: "appl"
@@ -114,6 +114,7 @@ describe ('Routing', function(){
             throw err;
           }
           res.should.have.property('statusCode', 201);
+          res.headers.should.have.property('content-type', 'application/json; charset=utf-8');
           done();
       });
     });
