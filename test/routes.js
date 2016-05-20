@@ -143,6 +143,7 @@ describe ('Routing', function(){
   });
 
   after (function(done){
+    mongoose.connection.db.dropDatabase();
     mongoose.connection.close();
     done();
   });
