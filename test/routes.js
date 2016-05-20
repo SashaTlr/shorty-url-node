@@ -113,7 +113,6 @@ describe ('Routing', function(){
           if (err) {
             throw err;
           }
-          console.log(res.headers.'content-type');
           res.should.have.property('statusCode', 201);
           done();
       });
