@@ -56,17 +56,10 @@ router.route('/shorten')
   });
 
 
-  //return all short codes
-  router.route('/short_urls')
+  //set root
+  router.route('/')
     .get(function(req, res) {
-      shortUrl.find(function(err, short_urls){
-        if (err) {
-          res.send(err);
-        }
-        else {
-          res.json(short_urls);
-        }
-      });
+      res.send('<h2>Welcome to shorty url!</h2>');
     });
 
 // return url for given shortcode
