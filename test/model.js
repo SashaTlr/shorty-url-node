@@ -49,15 +49,15 @@ describe ('Shortened URL model tests', function(){
 
     it('url should be a string', function(done){
       new_url = {
-        shortcode: parseInt("120423"),
-        url: "http://www.teststring.com"
+        shortcode: "testing",
+        url: parseInt("120423")
       }
       var addShortCode = new shortUrl(new_url);
       addShortCode.save(function (err, docs){
         if (err) {
           throw err;
         }
-          addShortCode.shortcode.should.be.type('string');
+          addShortCode.url.should.be.type('string');
           done();
       });
     });
@@ -87,6 +87,21 @@ describe ('Shortened URL model tests', function(){
           count.should.equal(0);
           done();
         });
+      });
+    });
+
+    it('shortcode should be a string', function(done){
+      new_url = {
+        shortcode: parseInt("120423"),
+        url: "http://www.teststring.com"
+      }
+      var addShortCode = new shortUrl(new_url);
+      addShortCode.save(function (err, docs){
+        if (err) {
+          throw err;
+        }
+          addShortCode.shortcode.should.be.type('string');
+          done();
       });
     });
 
