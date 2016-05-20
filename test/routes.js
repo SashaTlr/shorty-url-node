@@ -99,6 +99,25 @@ describe ('Routing', function(){
           done();
       });
     });
+
+    it('should return status 201 if post is successful' , function(done){
+      var urlShort = {
+        url: "http://www.apple.com",
+        shortcode: "appl"
+      };
+
+      request(api_url)
+        .post('shorten')
+        .send(urlShort)
+        .end(function(err, res){
+          if (err) {
+            throw err;
+          }
+          console.log(res.headers.'content-type');
+          res.should.have.property('statusCode', 201);
+          done();
+      });
+    });
   });
 
   describe('Get encoded shortcode', function(){
