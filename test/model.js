@@ -88,6 +88,21 @@ describe ('Shortened URL model tests', function(){
         });
       });
     });
+
+    it('shortcodes should match reg exp ^[0-9a-zA-Z_]{4,}$.]', function(done){
+      new_url = {
+        shortcode: "#####",
+        url: "http://www.testing.com",
+      }
+      var addShortCode = new shortUrl(new_url);
+      addShortCode.save(function (err, docs){
+        shortUrl.count({_id: addShortCode.id}, function(err, count){
+          count.should.equal(0);
+        done();
+        });
+      });
+    });
+
   });
 
   after (function(done){
