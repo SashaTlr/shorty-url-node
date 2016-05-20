@@ -25,7 +25,7 @@ describe ('Shortened URL model tests', function(){
         if (err){
           throw err
         }
-          shortUrl.count(new_url, function(err, count){
+          shortUrl.count({_id: addShortCode.id}, function(err, count){
           count.should.equal(1);
           done();
         });
@@ -36,7 +36,7 @@ describe ('Shortened URL model tests', function(){
       new_url = {"shortcode":"abcdef", "url":""}
       var addShortCode = new shortUrl(new_url);
       addShortCode.save(function (err, docs){
-        shortUrl.count(new_url, function(err, count){
+        shortUrl.count({_id: addShortCode.id}, function(err, count){
           count.should.equal(0);
           done();
         });
