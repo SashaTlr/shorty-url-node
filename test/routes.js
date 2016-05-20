@@ -142,4 +142,9 @@ describe ('Routing', function(){
     });
   });
 
+  after (function(done){
+    mongoose.connection.close();
+    done();
+  });
+
 })
