@@ -3,6 +3,7 @@ var assert = require('assert');
 var request = require('supertest');
 var mongoose = require('mongoose');
 var mongoURI = "mongodb://localhost:27017/test";
+
 var api_url = "http://localhost:3000/"
 
 describe ('Routing', function(){
@@ -42,11 +43,25 @@ describe ('Routing', function(){
           }
           res.should.have.property('statusCode', 400);
           done();
-        });
+      });
     });
 
-    xit('should create a passing shortcode if shortcode is blank' , function(done){
+    it('should create a passing shortcode if shortcode is blank' , function(done){
+      var urlShort = {
+        url: "www.apple.com",
+        shortcode: ""
+      };
 
+      request(api_url)
+        .post('shorten')
+        .send(urlShort)
+        .end(function(err, res){
+          if (err) {
+            throw err;
+          }
+          res.body.shortcode.should.match(/^[0-9a-zA-Z_]{6}$/);
+          done();
+      });
     });
 
     it('should return error 409 if shortcode already exists', function(done){
@@ -64,7 +79,7 @@ describe ('Routing', function(){
           }
           res.should.have.property('statusCode', 409);
           done();
-        });
+      });
     });
 
     it('should return error 422 if shortcode fails to meet regex /^[0-9a-zA-Z_]{4,}$/' , function(done){
@@ -82,7 +97,7 @@ describe ('Routing', function(){
           }
           res.should.have.property('statusCode', 422);
           done();
-        });
+      });
     });
   });
 
