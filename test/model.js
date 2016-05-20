@@ -14,6 +14,18 @@ describe ('Shortened URL model tests', function(){
   before (function(done){
     mongoose.connect(mongoURI);
     mongoose.connection.db.dropDatabase();
+
+    new_url = {
+      shortcode: "apple",
+      url: "http://www.apple.com",
+    }
+    var addShortCode = new shortUrl(new_url);
+    addShortCode.save(function (err, docs){
+      if (err){
+        throw err
+      }
+    });
+
     done();
   });
 
@@ -63,6 +75,19 @@ describe ('Shortened URL model tests', function(){
       });
     });
 
+    it('shortcodes should be unique', function(done){
+      new_url = {
+        shortcode: "apple",
+        url: "http://www.apple.com",
+      }
+      var addShortCode = new shortUrl(new_url);
+      addShortCode.save(function (err, docs){
+        shortUrl.count({_id: addShortCode.id}, function(err, count){
+          count.should.equal(0);
+        done();
+        });
+      });
+    });
   });
 
   after (function(done){
