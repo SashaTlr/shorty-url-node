@@ -39,9 +39,9 @@ router.route('/shorten')
         if (err.code == 11000) {
           res.status(409).send('The desired shortcode is already in use. Shortcodes are case-sensitive.')
         } else if (err.errors.url && err.errors.url.kind == 'required') {
-            res.status(400).send(err.errors.url.message);
+          res.status(400).send(err.errors.url.message);
         } else if (err.errors.shortcode.kind == 'user defined') {
-            res.status(422).send(err.errors.shortcode.message);
+          res.status(422).send(err.errors.shortcode.message);
         } else {
           res.status(500).send('An unknown internal error occurred');
         }
