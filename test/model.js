@@ -19,7 +19,10 @@ describe ('Shortened URL model tests', function(){
 
   describe ('Add objects to URL model', function() {
     it('valid url and shortcode should be added to database', function(done){
-      new_url = {"shortcode":"abcdef", "url":"www.google.com"}
+      new_url = {
+        shortcode: "google",
+        url: "http://www.google.com",
+      }
       var addShortCode = new shortUrl(new_url);
       addShortCode.save(function (err, docs){
         if (err){
@@ -33,7 +36,10 @@ describe ('Shortened URL model tests', function(){
     });
 
     it('blank url should not be added to database', function(done){
-      new_url = {"shortcode":"abcdef", "url":""}
+      new_url = {
+        shortcode: "google",
+        url: ""
+      }
       var addShortCode = new shortUrl(new_url);
       addShortCode.save(function (err, docs){
         shortUrl.count({_id: addShortCode.id}, function(err, count){
@@ -44,7 +50,10 @@ describe ('Shortened URL model tests', function(){
     });
 
     it('blank shortcode should not be added to database', function(done){
-      new_url = {"shortcode":"", "url":"www.google.com"}
+      new_url = {
+        shortcode: "",
+        url: "http://www.google.com",
+      }
       var addShortCode = new shortUrl(new_url);
       addShortCode.save(function (err, docs){
         shortUrl.count({_id: addShortCode.id}, function(err, count){
