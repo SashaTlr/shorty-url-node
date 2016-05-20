@@ -26,7 +26,7 @@ describe ('Routing', function(){
     done();
   });
 
-  describe('Create Shortened URL', function(){
+  describe('Create shortened URL', function(){
 
     it('should return error 400 if url is blank', function(done){
       var urlShort = {
