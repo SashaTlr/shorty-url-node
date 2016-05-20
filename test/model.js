@@ -47,6 +47,23 @@ describe ('Shortened URL model tests', function(){
       });
     });
 
+    it('url should be a string', function(done){
+      new_url = {
+        shortcode: parseInt("120423"),
+        url: "http://www.teststring.com"
+      }
+      var addShortCode = new shortUrl(new_url);
+      addShortCode.save(function (err, docs){
+        if (err) {
+          throw err;
+        }//shortUrl.count({_id: addShortCode.id}, function(err, count){
+          //count.should.equal(0);
+          addShortCode.shortcode.should.be.type('string');
+          done();
+      //  });
+      });
+    });
+
     it('blank url should not be added to database', function(done){
       new_url = {
         shortcode: "google",
