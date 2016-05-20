@@ -36,7 +36,18 @@ describe ('Shortened URL model tests', function(){
       new_url = {"shortcode":"abcdef", "url":""}
       var addShortCode = new shortUrl(new_url);
       addShortCode.save(function (err, docs){
-          shortUrl.count(new_url, function(err, count){
+        shortUrl.count(new_url, function(err, count){
+          count.should.equal(0);
+          done();
+        });
+      });
+    });
+
+    it('blank shortcode should not be added to database', function(done){
+      new_url = {"shortcode":"", "url":"www.google.com"}
+      var addShortCode = new shortUrl(new_url);
+      addShortCode.save(function (err, docs){
+        shortUrl.count({_id: addShortCode.id}, function(err, count){
           count.should.equal(0);
           done();
         });
