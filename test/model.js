@@ -56,11 +56,9 @@ describe ('Shortened URL model tests', function(){
       addShortCode.save(function (err, docs){
         if (err) {
           throw err;
-        }//shortUrl.count({_id: addShortCode.id}, function(err, count){
-          //count.should.equal(0);
+        }
           addShortCode.shortcode.should.be.type('string');
           done();
-      //  });
       });
     });
 
