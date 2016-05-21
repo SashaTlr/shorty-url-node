@@ -3,10 +3,11 @@ var assert = require('assert');
 var request = require('supertest');
 var mongoose = require('mongoose');
 var mongoURI = "mongodb://localhost:27017/test";
+var shortUrl = require('../app/models/shortUrl.js')
 
 var api_url = "http://localhost:3000/"
 
-var shortUrl = require('../app/models/shortUrl.js')
+
 
 describe ('Shortened URL model tests', function(){
 
