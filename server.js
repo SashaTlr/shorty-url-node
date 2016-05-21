@@ -1,9 +1,7 @@
-  var express = require("express");
-  var mongoose = require("mongoose");
-  var bodyParser = require("body-parser");
-  var shortUrl = require("./app/models/shortUrl");
-  var routes = require("./app/routes/shortUrl")
-  var RandExp = require('randexp');
+var express = require("express");
+var mongoose = require("mongoose");
+var bodyParser = require("body-parser");
+var routes = require("./app/routes/shortUrl")
 
 var port = 3000;
 
@@ -24,8 +22,6 @@ mongoose.connection.on("error", function(err) {
   console.log("Could not connect to mongo server");
   return console.log(err);
 });
-
-
 
 app.listen(port);
 console.log('Running on port ' + port);
