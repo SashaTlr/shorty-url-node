@@ -1,9 +1,8 @@
 var should = require('should');
-var assert = require('assert');
 var request = require('supertest');
 var mongoose = require('mongoose');
-var mongoURI = "mongodb://localhost:27017/test";
 
+var mongoURI = "mongodb://localhost:27017/test";
 var api_url = "http://localhost:3000/"
 
 describe ('Routing', function(){
